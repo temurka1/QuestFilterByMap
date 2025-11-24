@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<DuckovPath>C:\Program Files (x86)\Steam\steamapps\common\Escape from Duckov</DuckovPath>
+		<OutputPath>$(DuckovPath)\Duckov_Data\Mods\$(SolutionName)</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="$(DuckovPath)\Duckov_Data\Managed\TeamSoda.*" />
+		<Reference Include="$(DuckovPath)\Duckov_Data\Managed\ItemStatsSystem.dll" />
+		<Reference Include="$(DuckovPath)\Duckov_Data\Managed\Unity*" />
+		<Reference Include="$(DuckovPath)\Duckov_Data\Managed\ParadoxNotion*" />
+		<Reference Include="$(DuckovPath)\Duckov_Data\Managed\NodeCanvas*" />
+		
+		<PackageReference Include="Lib.Harmony" Version="2.4.1" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy &quot;$(SolutionDir)preview.png&quot; &quot;$(OutputPath)&quot; /Y" />
+		<Exec Command="copy &quot;$(SolutionDir)info.ini&quot; &quot;$(OutputPath)&quot; /Y" />
+	</Target>
+
+</Project>
